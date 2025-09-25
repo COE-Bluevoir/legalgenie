@@ -1,0 +1,15 @@
+{
+  "name": "legalgenie",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:api": "npm --prefix api run dev",
+    "dev:web": "npm --prefix web run dev",
+    "dev:pipeline": "set PATH=C:\\\\Users\\\\SandeepBhupathiRaju\\\\miniconda3;C:\\\\Users\\\\SandeepBhupathiRaju\\\\miniconda3\\\\Scripts;C:\\\\Users\\\\SandeepBhupathiRaju\\\\miniconda3\\\\condabin;%PATH% && python -m uvicorn app.api:app --reload --host 0.0.0.0 --port 8000 --app-dir lg_pipeline",
+    "dev:all": "concurrently -k -s first -n api,web,pipeline \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:pipeline\"",
+    "dev:db": "docker compose up postgres"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

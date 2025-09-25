@@ -1,0 +1,39 @@
+# Secrets
+.env
+**/.env
+
+# Node artefacts
+node_modules/
+api/api/node_modules/
+web/node_modules/
+web/dist/
+web/.next/
+
+# Backend database dumps
+api/data/
+api/data.db
+
+# Python pipeline artefacts
+lg_pipeline/.venv/
+lg_pipeline/__pycache__/
+lg_pipeline/.pytest_cache/
+lg_pipeline/.chroma/
+lg_pipeline/.chroma_backup/
+lg_pipeline/.chroma_old/
+lg_pipeline/models/
+lg_pipeline/data/
+lg_pipeline/output/
+lg_pipeline/*.whl
+
+# Uploads and generated ingestion data
+uploads/
+ingestion-output/
+
+# Logs & misc
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# OCR secrets
+OCR/*.json

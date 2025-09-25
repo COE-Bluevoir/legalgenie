@@ -1,0 +1,70 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15
+    container_name: legalgenie-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: legalgenie
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: legalgenie
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U legalgenie"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ./api/.env
+    environment:
+      DATABASE_URL: postgres://legalgenie:password@postgres:5432/legalgenie
+      PORT: 8787
+      PIPELINE_ROOT: /app/lg_pipeline
+      PIPELINE_PYTHON: /app/venv/bin/python
+      ASK_RETRIEVE_URL: http://pipeline:8000/retrieve
+      RAG_RETRIEVE_URL: http://pipeline:8000/retrieve
+      RETRIEVAL_SERVICE_URL: http://pipeline:8000/retrieve
+      CHROMA_URL: http://pipeline:8000
+    ports:
+      - "8787:8787"
+    volumes:
+      - uploads_data:/app/api/data/uploads
+  pipeline:
+    build:
+      context: .
+      dockerfile: ./lg_pipeline/Dockerfile
+    restart: unless-stopped
+    environment:
+      CHROMA_PATH: /app/.chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - uploads_data:/app/data/uploads
+  web:
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_started
+    env_file:
+      - ./web/.env
+    environment:
+      VITE_API_BASE: http://localhost:8787
+    ports:
+      - "5173:5173"
+volumes:
+  postgres_data:
+  uploads_data:
