@@ -1,0 +1,9 @@
+digraph G {
+  "__start__";
+  "load";
+  "ingest";
+  "__end__";
+  "__start__" -> "load";
+  "load" -> "ingest";
+  "ingest" -> "__end__";
+}

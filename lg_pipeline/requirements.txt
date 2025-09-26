@@ -1,0 +1,14 @@
+langgraph>=0.2.34
+langchain>=0.2.16
+langchain-core>=0.2.38
+langchain-text-splitters>=0.2.2
+python-docx>=1.1.2
+pydantic>=2.7.4
+pytest>=8.3.2
+transformers>=4.44.0
+torch>=2.3.0
+chromadb>=0.5.4
+neo4j>=5.23.1
+spacy>=3.7.4
+fastapi>=0.111.0
+uvicorn>=0.30.0
