@@ -99,7 +99,7 @@ Install Node dependencies: npm install in the repo root, npm install --prefix ap
 Install Python tooling: python -m pip install -r lg_pipeline/requirements.txt, then create/prime the Conda NER environment (e.g., conda create -n ner_env python=3.10 followed by installing the spaCy legal model you use).
 pip install ./en_legal_ner_trf-0.0.1-py3-none-any.whl
 download the hf_cache_inlegalbert from sharepoint and update the env files with its location
------------------
+
 psql setup: CREATE ROLE legalgenie WITH LOGIN PASSWORD 'password';
 CREATE DATABASE legalgenie OWNER legalgenie;
 GRANT ALL PRIVILEGES ON DATABASE legalgenie TO legalgenie;
