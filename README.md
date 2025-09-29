@@ -92,3 +92,14 @@ Uploads saved by the API land in `api/data/uploads/`. The Python pipeline reads 
 
 Happy hacking! Keep improvements and troubleshooting notes in this README so the next person can get started even faster.
 
+********Installation Guide****************
+Install Prerequisites- Node.js ≥18 with npm, Python 3.11+, PowerShell, and Conda for the spaCy NER env; Postgres and Neo4j.
+Setup .env counterpart (.env, api/.env, web/.env, lg_pipeline/.env);
+Install Node dependencies: npm install in the repo root, npm install --prefix api, and npm install --prefix web
+Install Python tooling: python -m pip install -r lg_pipeline/requirements.txt, then create/prime the Conda NER environment (e.g., conda create -n ner_env python=3.10 followed by installing the spaCy legal model you use).
+pip install ./en_legal_ner_trf-0.0.1-py3-none-any.whl
+download the hf_cache_inlegalbert from sharepoint and update the env files with its location
+-----------------
+psql setup: CREATE ROLE legalgenie WITH LOGIN PASSWORD 'password';
+CREATE DATABASE legalgenie OWNER legalgenie;
+GRANT ALL PRIVILEGES ON DATABASE legalgenie TO legalgenie;
